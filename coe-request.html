@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>COE Request — Flown Beauty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f0eaf8;
+      color: #1a1230;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2.5rem 1rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      border: 0.5px solid #ddd6ee;
+      padding: 2.25rem;
+      width: 100%;
+      max-width: 580px;
+    }
+    .logo { font-size: 28px; font-weight: 300; letter-spacing: 0.22em; color: #1a1230; text-transform: uppercase; margin-bottom: 3px; }
+    .logo-sub { font-size: 11px; color: #9b8bb4; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .form-header { padding-bottom: 1.25rem; border-bottom: 0.5px solid #ede6f7; margin-bottom: 1.75rem; }
+    .form-title { font-size: 17px; font-weight: 500; color: #1a1230; margin: 0 0 4px; }
+    .form-subtitle { font-size: 13px; color: #9b8bb4; }
+    .section { margin-bottom: 1.75rem; }
+    .section-label { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.09em; color: #b39fd1; margin-bottom: 10px; }
+    .field-grid { display: grid; gap: 12px; }
+    .field-grid-2 { grid-template-columns: 1fr 1fr; }
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label { font-size: 13px; color: #5a4a72; font-weight: 400; }
+    .field input, .field select, .field textarea {
+      font-size: 14px; padding: 9px 12px; border: 0.5px solid #ddd6ee;
+      border-radius: 10px; background: #faf8fd; color: #1a1230;
+      outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+      appearance: none; -webkit-appearance: none; font-family: inherit; width: 100%;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: #9b6dd6; box-shadow: 0 0 0 3px rgba(155,109,214,0.12);
+    }
+    .field input.error, .field select.error, .field textarea.error { border-color: #c0507a; }
+    .field .hint { font-size: 11px; color: #b39fd1; }
+    .checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+    .checkbox-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .checkbox-item input[type=checkbox] {
+      width: 16px; height: 16px; accent-color: #7c3aed;
+      border-radius: 4px; cursor: pointer; flex-shrink: 0;
+    }
+    .checkbox-item span { font-size: 13px; color: #5a4a72; }
+    .divider { height: 0.5px; background: #ede6f7; margin: 1.5rem 0; }
+    .submit-row { display: flex; justify-content: flex-end; gap: 10px; }
+    .btn-secondary {
+      background: transparent; border: 0.5px solid #c8b8e8; border-radius: 10px;
+      padding: 10px 20px; font-size: 14px; color: #9b8bb4; cursor: pointer; font-family: inherit;
+    }
+    .btn-secondary:hover { background: #faf8fd; }
+    .btn-primary {
+      background: #7c3aed; border: none; border-radius: 30px; padding: 10px 32px;
+      font-size: 14px; color: #fff; cursor: pointer; font-weight: 500;
+      font-family: inherit; display: flex; align-items: center; gap: 6px;
+    }
+    .btn-primary:hover { background: #6d28d9; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .banner {
+      display: none; border-radius: 10px; padding: 16px 18px;
+      font-size: 14px; margin-top: 1rem; align-items: center; gap: 8px;
+    }
+    .banner-success { background: #f0fce8; border: 0.5px solid #b8dda0; color: #3a6e1a; }
+    .banner-error { background: #fceef4; border: 0.5px solid #e8a8c0; color: #8c2a50; }
+    .spinner {
+      width: 13px; height: 13px; border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin 0.6s linear infinite; display: inline-block;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (max-width: 520px) { .field-grid-2 { grid-template-columns: 1fr; } .card { padding: 1.5rem; } }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <div class="form-header">
+    <div class="logo">FLOWN</div>
+    <div class="logo-sub">Certificate of Employment Request</div>
+    <p class="form-title">COE Request Form</p>
+    <p class="form-subtitle">Fill in your details below. Your COE will be sent to your email within 1–2 business days.</p>
+  </div>
+
+  <div class="banner banner-error" id="errorBanner">
+    ✕ Something went wrong. Please try again.
+  </div>
+
+  <div class="section">
+    <p class="section-label">Personal information</p>
+    <div class="field-grid field-grid-2">
+      <div class="field" style="grid-column: 1 / -1;">
+        <label for="fullName">Full name</label>
+        <input type="text" id="fullName" placeholder="Jane Santos" />
+      </div>
+      <div class="field">
+        <label for="role">Role / Position</label>
+        <input type="text" id="role" placeholder="e.g. Creative Strategist" />
+      </div>
+      <div class="field">
+        <label for="employmentType">Employment type</label>
+        <select id="employmentType">
+          <option value="" disabled selected>Select type</option>
+          <option>Full-Time</option>
+          <option>Part-Time</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="hireDate">Hire date</label>
+        <input type="date" id="hireDate" />
+      </div>
+      <div class="field">
+        <label for="employmentStatus">Employment status</label>
+        <select id="employmentStatus">
+          <option value="" disabled selected>Select status</option>
+          <option>Active</option>
+          <option>Resigned</option>
+          <option>Ended Contract</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Compensation</p>
+    <div class="field-grid">
+      <div class="field">
+        <label for="hourlyRate">Hourly rate (USD)</label>
+        <input type="text" id="hourlyRate" placeholder="e.g. 7.50" />
+      </div>
+    </div>
+    <div style="margin-top: 12px;">
+      <label class="checkbox-item">
+        <input type="checkbox" id="includeComp" />
+        <span>Include compensation details in my COE</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-label">Request details</p>
+    <div class="field-grid">
+      <div class="field">
+        <label for="purpose">Purpose of COE</label>
+        <select id="purpose">
+          <option value="" disabled selected>Select purpose</option>
+          <option>Personal Documentation</option>
+          <option>Visa Application</option>
+          <option>Loan Application</option>
+          <option>Bank Account Opening</option>
+          <option>Government Requirement</option>
+          <option>New Employment</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="otherPurpose" id="otherPurposeLabel" style="display:none;">Please specify</label>
+        <input type="text" id="otherPurpose" placeholder="Specify purpose" style="display:none;" />
+      </div>
+      <div class="field">
+        <label for="email">Email address <span style="font-size:11px; color:#b39fd1;">(where COE will be sent)</span></label>
+        <input type="email" id="email" placeholder="jane@gmail.com" />
+      </div>
+      <div class="field">
+        <label for="dateNeeded">Date needed by</label>
+        <input type="date" id="dateNeeded" />
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="submit-row">
+    <button class="btn-secondary" onclick="resetForm()">Clear</button>
+    <button class="btn-primary" id="submitBtn" onclick="submitForm()">
+      <span id="submitLabel">Submit Request</span>
+    </button>
+  </div>
+
+  <div class="banner banner-success" id="successBanner">
+    ✓ Request submitted successfully! Your COE will be sent to your email within 1–2 business days.
+  </div>
+
+</div>
+
+<script>
+  const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxoQIvmAqIbNfaRO_u7JBfVF7UFyJDvWKLo29oroNfXRYMUG-z7I4iHEzZPHV7I2IMwvg/exec";
+
+  // Show/hide "other purpose" field
+  document.getElementById('purpose').addEventListener('change', function() {
+    const show = this.value === 'Other';
+    document.getElementById('otherPurpose').style.display = show ? 'block' : 'none';
+    document.getElementById('otherPurposeLabel').style.display = show ? 'block' : 'none';
+  });
+
+  function resetForm() {
+    ['fullName','role','hireDate','hourlyRate','email','dateNeeded','otherPurpose'].forEach(id => {
+      const el = document.getElementById(id); if(el) { el.value = ''; el.classList.remove('error'); }
+    });
+    document.getElementById('employmentType').value = '';
+    document.getElementById('employmentStatus').value = '';
+    document.getElementById('purpose').value = '';
+    document.getElementById('includeComp').checked = false;
+    document.getElementById('otherPurpose').style.display = 'none';
+    document.getElementById('otherPurposeLabel').style.display = 'none';
+    document.getElementById('successBanner').style.display = 'none';
+    document.getElementById('errorBanner').style.display = 'none';
+  }
+
+  async function submitForm() {
+    const required = ['fullName','role','employmentType','hireDate','employmentStatus','hourlyRate','purpose','email','dateNeeded'];
+    let valid = true;
+    required.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) { el.classList.add('error'); valid = false; }
+      else el.classList.remove('error');
+    });
+    if (!valid) return;
+
+    const btn = document.getElementById('submitBtn');
+    const label = document.getElementById('submitLabel');
+    btn.disabled = true;
+    label.innerHTML = '<span class="spinner"></span> Submitting…';
+
+    const purposeVal = document.getElementById('purpose').value;
+    const finalPurpose = purposeVal === 'Other'
+      ? (document.getElementById('otherPurpose').value || 'Other')
+      : purposeVal;
+
+    const includeComp = document.getElementById('includeComp').checked;
+
+    const payload = {
+      fullName:         document.getElementById('fullName').value.trim(),
+      role:             document.getElementById('role').value.trim(),
+      employmentType:   document.getElementById('employmentType').value,
+      hireDate:         document.getElementById('hireDate').value,
+      employmentStatus: document.getElementById('employmentStatus').value,
+      hourlyRate:       document.getElementById('hourlyRate').value.trim(),
+      includeComp:      includeComp,
+      purpose:          finalPurpose,
+      email:            document.getElementById('email').value.trim(),
+      dateNeeded:       document.getElementById('dateNeeded').value,
+    };
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: "POST", mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+    } catch(err) {}
+
+    resetForm();
+    btn.disabled = false;
+    label.textContent = 'Submit Request';
+
+    const banner = document.getElementById('successBanner');
+    banner.style.display = 'flex';
+    banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>
