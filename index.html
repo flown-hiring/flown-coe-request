@@ -156,13 +156,13 @@
         <label for="purpose">Purpose of COE</label>
         <select id="purpose">
           <option value="" disabled selected>Select purpose</option>
-          <option>Personal Documentation Purposes</option>
-          <option>Travel Purposes</option>
-          <option>Visa Application Purposes</option>
-          <option>Loan Application Purposes</option>
-          <option>Bank Account Opening Purposes</option>
-          <option>Government Requirement Purposes</option>
-          <option>New Employment Purposes</option>
+          <option>Personal Documentation</option>
+          <option>Travel</option>
+          <option>Visa Application</option>
+          <option>Loan Application</option>
+          <option>Bank Account Opening</option>
+          <option>Government Requirement</option>
+          <option>New Employment</option>
           <option>Other</option>
         </select>
       </div>
@@ -191,7 +191,7 @@
   </div>
 
   <div class="banner banner-success" id="successBanner">
-    ✓ Request submitted successfully! Your COE will be sent to your email within 3–5 minutes.
+    ✓ Request submitted successfully! Your COE will be sent to your email within 1–2 business days.
   </div>
 
 </div>
@@ -202,7 +202,7 @@
     if (!isNaN(val)) el.value = val.toFixed(2);
   }
 
-  const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyFPGAZwDr0-XzlwTCdtSYvY8_r9QdT_VQNl6umJIqwSivSFlIN8XofUj1fKvBw2pHVsA/exec";
+  const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzL7fgzxg8MQnSRINsTzs2utaxvgqyTrz0BgYhx9b8dkmMg0NJWVhp42EGsrrQdis9a5g/exec";
 
   // Show/hide "other purpose" field
   document.getElementById('purpose').addEventListener('change', function() {
